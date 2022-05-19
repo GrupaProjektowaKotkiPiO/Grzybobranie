@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane prefHeight="788.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.GameController">
+    <children>
+        <Rectangle fill="#008037" height="788.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1175.0" />
+        <Rectangle fill="#e4f8ff" height="788.0" layoutX="815" width="482.0" />
+        <ImageView fitHeight="768.0" fitWidth="768.0" layoutX="20" layoutY="20" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../css/images/Background.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="947.0" layoutY="53.0" stylesheets="@../css/GameStatistics.css" text="Game statistics" />
+        <Group layoutX="830.0" layoutY="110.0" stylesheets="@../css/Table.css">
+            <children>
+                <ImageView fitHeight="400" fitWidth="450" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Table.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="106.0" layoutY="23.0" text="Szymon" />
+                <Label layoutX="206.0" layoutY="23.0" text="Daria" />
+                <Label layoutX="298.0" layoutY="23.0" text="Maciej" />
+                <Label alignment="CENTER" layoutX="385.0" layoutY="14.0" prefWidth="57.0" text="Pani&#10;Doktor" />
+                <Label alignment="CENTER" layoutX="99.0" layoutY="58.0" prefHeight="18.0" prefWidth="28.0" text="0" />
+                <Label alignment="CENTER" layoutX="99.0" layoutY="86.0" prefHeight="18.0" prefWidth="28.0" text="0" />
+                <Label alignment="CENTER" layoutX="99.0" layoutY="114.0" prefHeight="18.0" prefWidth="28.0" text="0" />
+                <Label alignment="CENTER" layoutX="192.0" layoutY="58.0" prefHeight="18.0" prefWidth="28.0" text="0" />
+                <Label alignment="CENTER" layoutX="192.0" layoutY="86.0" prefHeight="18.0" prefWidth="28.0" text="0" />
+                <Label alignment="CENTER" layoutX="192.0" layoutY="114.0" prefHeight="18.0" prefWidth="28.0" text="0" />
+                <Label alignment="CENTER" layoutX="290.0" layoutY="58.0" prefHeight="18.0" prefWidth="28.0" text="0" />
+                <Label alignment="CENTER" layoutX="290.0" layoutY="86.0" prefHeight="18.0" prefWidth="28.0" text="0" />
+                <Label alignment="CENTER" layoutX="290.0" layoutY="114.0" prefHeight="18.0" prefWidth="28.0" text="0" />
+                <Label alignment="CENTER" layoutX="386.0" layoutY="58.0" prefHeight="18.0" prefWidth="28.0" text="0" />
+                <Label alignment="CENTER" layoutX="386.0" layoutY="86.0" prefHeight="18.0" prefWidth="28.0" text="0" />
+                <Label alignment="CENTER" layoutX="386.0" layoutY="114.0" prefHeight="18.0" prefWidth="28.0" text="0" />
+            </children>
+        </Group>
+        <Group layoutX="910.0" layoutY="320.0" stylesheets="@../css/YourTurn.css">
+            <children>
+                <Label alignment="CENTER" prefHeight="47.0" prefWidth="300.0" text="YOUR TURN!" />
+                <Label alignment="CENTER" layoutY="52.0" prefHeight="47.0" prefWidth="300.0" text="Szymon" />
+            </children>
+        </Group>
+        <Group layoutX="1010.0" layoutY="490.0">
+            <children>
+                <Button layoutY="80.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Move" />
+                <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="-15.0" pickOnBounds="true" preserveRatio="true" translateX="30">
+                    <image>
+                        <Image url="@../css/images/Dice_1.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Group>
+        <Group>
+            <children>
+                <ImageView fitHeight="87.0" fitWidth="92.0" layoutX="35.0" layoutY="27.5" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Basket_4.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="87.0" fitWidth="92.0" layoutX="35.0" layoutY="27.5" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Basket_3.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="87.0" fitWidth="92.0" layoutX="35.0" layoutY="27.5" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Basket_2.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="87.0" fitWidth="92.0" layoutX="35.0" layoutY="27.5" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Basket_1.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Group>
+        <Group layoutX="950" layoutY="700.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#quit" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Quit" />
+                <Button layoutX="120.0" mnemonicParsing="false" onAction="#restart" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Restart" />
+            </children>
+        </Group>
+        <Group visible="false">
+            <children>
+                <Rectangle height="788.0" opacity="0.81" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1250.0" />
+                <Rectangle fill="#e4f8ff" height="400.0" layoutX="384.0" layoutY="194.0" strokeWidth="0.0" width="482.0" />
+                <Button layoutX="498.0" layoutY="505.0" mnemonicParsing="false" onAction="#quit" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Quit" />
+                <Button layoutX="667.0" layoutY="505.0" mnemonicParsing="false" onAction="#restart" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Restart" />
+                <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="550.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Basket_4.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="537.0" layoutY="241.0" stylesheets="@../css/GameStatistics.css" text="Tomek win!" />
+            </children>
+        </Group>
+    </children>
+</AnchorPane>
