@@ -14,7 +14,7 @@ public class PlayerTurnController {
     }
 
     public void changePlayerInWindow(Player player) {
-        if(player.getType()== PlayerType.PLAYER4)
+        if(player.getType()== PlayerType.PLAYER4) //todo: zmienic to
             turnLabel.setText(player.getFirstName()+" "+player.getLastName());
         else
             turnLabel.setText(player.getFirstName());
