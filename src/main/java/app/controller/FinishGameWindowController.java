@@ -4,6 +4,7 @@ import app.dto.Player;
 import app.dto.PlayerType;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
 public class FinishGameWindowController {
     private Player winner;
@@ -19,6 +20,7 @@ public class FinishGameWindowController {
     }
 
     public void show() {
+        ((ImageView)(window.getChildren().get(4))).setImage(winner.getPlayerOnBoard().getImage());
         ((Label)(window.getChildren().get(5))).setText(winner.getFirstName()+" win!");
         window.setVisible(true);
     }
