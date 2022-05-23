@@ -42,5 +42,7 @@ public class DiceController {
         return dice.getResultOfThrowingDice();
     }
 
-    public Button getMoveButton() { return moveButton; }
+    public Button getMoveButton() {
+        return moveButton;
+    }
 }

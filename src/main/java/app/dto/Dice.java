@@ -8,14 +8,20 @@ public class Dice {
     private ImageView diceTile;
     private int resultOfThrowingDice;
 
-    public Dice(ImageView inputDiceTile) { diceTile=inputDiceTile; }
-
-    public void throwTheDice() {
-        Random number=new Random();
-        resultOfThrowingDice=number.nextInt(6)+1;
+    public Dice(ImageView inputDiceTile) {
+        diceTile = inputDiceTile;
     }
 
-    public ImageView getDiceTile() { return diceTile; }
+    public void throwTheDice() {
+        Random number = new Random();
+        resultOfThrowingDice = number.nextInt(6) + 1;
+    }
 
-    public int getResultOfThrowingDice() { return resultOfThrowingDice; }
+    public ImageView getDiceTile() {
+        return diceTile;
+    }
+
+    public int getResultOfThrowingDice() {
+        return resultOfThrowingDice;
+    }
 }

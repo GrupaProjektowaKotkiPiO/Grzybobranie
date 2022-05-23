@@ -17,6 +17,7 @@ public class MoveLogic {
     private boolean winner;
     private int throwDiceCounter;
     private int newPosition;
+
     public MoveLogic(TileController inputTileController,
                      PlayerController inputPlayerController,
                      DiceController inputDiceController,
@@ -49,10 +50,10 @@ public class MoveLogic {
             visibleConfiguration();
             playerController.getPlayers()[i].setMoveType(NORMAL);
             return;
-        }else if (playerController.getPlayers()[i].getMoveType() == REROLLBACKWARDS){
+        } else if (playerController.getPlayers()[i].getMoveType() == REROLLBACKWARDS) {
             newPosition = playerController.getPlayers()[i].getPosition() - diceController.throwTheDice();
             playerController.getPlayers()[i].setMoveType(NORMAL);
-        }else if(playerController.getPlayers()[i].getMoveType() == REROLL){
+        } else if (playerController.getPlayers()[i].getMoveType() == REROLL) {
             playerController.getPlayers()[i].setMoveType(NORMAL);
         }
 
