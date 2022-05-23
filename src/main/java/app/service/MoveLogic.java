@@ -36,6 +36,10 @@ public class MoveLogic {
         diceController.getMoveButton().setOnMousePressed(e -> {
             move();
 
+            while(playerController.getPlayers()[getThrowDiceCounter()].getMoveType()==STAY) {
+                playerController.getPlayers()[getThrowDiceCounter()].setMoveType(NORMAL);
+                incrementThrowDiceCounter();
+            }
             displayWindowController.changePlayerInWindow(playerController.getPlayers()[getThrowDiceCounter()]);
         });
     }
@@ -44,17 +48,13 @@ public class MoveLogic {
         int i = getThrowDiceCounter();
         newPosition = playerController.getPlayers()[i].getPosition() + diceController.throwTheDice();
 
-        if (playerController.getPlayers()[i].getMoveType() == STAY) {
-            incrementThrowDiceCounter();
-            visibleConfiguration();
-            playerController.getPlayers()[i].setMoveType(NORMAL);
-            return;
-        }else if (playerController.getPlayers()[i].getMoveType() == REROLLBACKWARDS){
+        if (playerController.getPlayers()[i].getMoveType() == REROLLBACKWARDS){
             newPosition = playerController.getPlayers()[i].getPosition() - diceController.throwTheDice();
             playerController.getPlayers()[i].setMoveType(NORMAL);
-        }else if(playerController.getPlayers()[i].getMoveType() == REROLL){
-            playerController.getPlayers()[i].setMoveType(NORMAL);
         }
+        if(playerController.getPlayers()[i].getMoveType() == REROLL)
+            playerController.getPlayers()[i].setMoveType(NORMAL);
+
 
         TileType type = tileController.getBoard()[newPosition].getType();
         switch (type) {
@@ -80,6 +80,7 @@ public class MoveLogic {
                 playerController.getPlayers()[i].setMoveType(REROLLBACKWARDS);
                 break;
         }
+
         playerController.getPlayers()[i].setPosition(newPosition);
         if (playerController.getPlayers()[i].getPosition() >= 36) {
             playerController.getPlayers()[i].setPosition(41);
@@ -95,10 +96,8 @@ public class MoveLogic {
             incrementThrowDiceCounter();
         visibleConfiguration();
 
-        if (playerController.getPlayers()[getThrowDiceCounter()].getPosition() == 41) {
+        if (playerController.getPlayers()[getThrowDiceCounter()].getPosition() == 41)
             if (isTheEndOfTheGame()) finishGameWindowController.show();
-        }
-
     }
 
     private boolean isTheEndOfTheGame() {
