@@ -79,7 +79,8 @@ public class MoveLogic {
                     playerController.getPlayers()[i].setBoletusCounter(playerController.getPlayers()[i].getBoletusCounter() - 2);
                     break;
                 case THUNDER:
-                    //TODO: implementation of switching baskets
+                    playerController.getPlayers()[i].setBoletusCounter(playerController.getPlayers()[i].getBoletusCounter() - 1);
+                    playerController.getPlayers()[i].setToadstoalCounter(playerController.getPlayers()[i].getToadstoalCounter() - 2);
                     break;
                 case BOAR:
                     playerController.getPlayers()[i].setMoveType(REROLLBACKWARDS);

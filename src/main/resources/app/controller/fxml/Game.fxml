@@ -16,7 +16,7 @@
                 <Image url="@../css/images/Background_2.png" />
             </image>
         </ImageView>
-        <Rectangle fill="#f9e8c9" height="792.0" layoutX="815" width="485.0" stroke="#4a4439" strokeType="INSIDE" strokeWidth="4.0"/>
+        <Rectangle fill="#f9e8c9" height="792.0" layoutX="815" stroke="#4a4439" strokeType="INSIDE" strokeWidth="4.0" width="485.0" />
         <ImageView fitHeight="768.0" fitWidth="768.0" layoutX="20" layoutY="20" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../css/images/Background_1.png" />
@@ -52,7 +52,7 @@
         </Group>
         <Group layoutX="915.0" layoutY="320.0" stylesheets="@../css/YourTurn.css">
             <children>
-                <Rectangle fill="#ffffff" layoutX="15" layoutY="-15.0" height="250.0" width="250.0" />
+                <Rectangle fill="#ffffff" height="250.0" layoutX="15" layoutY="-15.0" width="250.0" />
                 <Label alignment="CENTER" layoutX="-5" prefHeight="47.0" prefWidth="300.0" text="YOUR TURN!" />
                 <Label alignment="CENTER" layoutX="-5" layoutY="35.0" prefHeight="47.0" prefWidth="300.0" text="Szymon" />
                 <ImageView fitHeight="340.0" fitWidth="340.0" layoutX="-60.0" layoutY="-60.0" pickOnBounds="true" preserveRatio="true" translateX="30">
@@ -69,7 +69,7 @@
         </Group>
         <Group layoutX="1010.0" layoutY="600.0">
             <children>
-                <Button layoutY="100.0" layoutX="-1.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Move" />
+                <Button layoutX="-1.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Roll" />
                 <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="-15.0" pickOnBounds="true" preserveRatio="true" translateX="30">
                     <image>
                         <Image url="@../css/images/Dice_1.png" />
@@ -77,7 +77,7 @@
                 </ImageView>
             </children>
         </Group>
-        <Group layoutX="58.0" layoutY="33.0" >
+        <Group layoutX="58.0" layoutY="33.0">
             <children>
                 <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="91.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -254,7 +254,7 @@
         <Group visible="false">
             <children>
                 <Rectangle height="788.0" opacity="0.81" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1300.0" />
-                <Rectangle fill="#f9e8c9" height="470.0" layoutX="415.0" layoutY="150.0" width="500.0 " stroke="#4a4439" strokeType="INSIDE" strokeWidth="4.0"/>
+                <Rectangle fill="#f9e8c9" height="470.0" layoutX="415.0" layoutY="150.0" stroke="#4a4439" strokeType="INSIDE" strokeWidth="4.0" width="500.0 " />
                 <ImageView fitHeight="300.0" fitWidth="800.0" layoutX="515.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../css/images/Podium_2.png" />

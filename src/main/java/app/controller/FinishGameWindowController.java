@@ -35,8 +35,8 @@ public class FinishGameWindowController {
     }
 
     public void positionOnPodium(Player player) {
-        int result = player.getBoletusCounter() - player.getToadstoalCounter() + player.getBonus();
-        if (result > firstPlaceScore) {
+        int result = player.getBoletusCounter() - player.getToadstoalCounter() /*+ player.getBonus()*/;
+        if (result > firstPlaceScore || (result == firstPlaceScore && player.getBonus()>firstPlacePlayer.getBonus())) {
             firstPlaceScore=result;
 
             if(firstPlacePlayer !=null)
@@ -47,7 +47,7 @@ public class FinishGameWindowController {
             ((Label) window.getChildren().get(8)).setText(player.getFirstName());
             ((Label) window.getChildren().get(12)).setText(Integer.toString(result));
         } else {
-            if (result > secondPlaceScore) {
+            if (result > secondPlaceScore || (result == secondPlaceScore && player.getBonus()>secondPlacePlayer.getBonus())) {
                 secondPlaceScore = result;
 
                 if(secondPlacePlayer !=null)
@@ -58,7 +58,7 @@ public class FinishGameWindowController {
                 ((Label) window.getChildren().get(6)).setText(player.getFirstName());
                 ((Label) window.getChildren().get(11)).setText(Integer.toString(result));
             } else {
-                if (result > thirdPlaceScore) {
+                if (result > thirdPlaceScore || (result == thirdPlaceScore && player.getBonus()>thirdPlacePlayer.getBonus())) {
                     thirdPlaceScore = result;
 
                     if(thirdPlacePlayer !=null)
