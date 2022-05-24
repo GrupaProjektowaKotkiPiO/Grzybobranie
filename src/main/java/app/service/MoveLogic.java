@@ -1,8 +1,6 @@
 package app.service;
 
 import app.controller.*;
-import app.dto.MoveType;
-import app.dto.Player;
 import app.dto.TileType;
 
 import static app.dto.MoveType.*;
@@ -14,21 +12,28 @@ public class MoveLogic {
     private DiceController diceController;
     private PlayerTurnController displayWindowController;
     private FinishGameWindowController finishGameWindowController;
-    private boolean winner;
+    private MushroomAndTableController mushroomController;
+    private boolean firstBehindLine;
+    private boolean secondBehindLine;
+    private boolean thirdBehindLine;
     private int throwDiceCounter;
     private int newPosition;
     public MoveLogic(TileController inputTileController,
                      PlayerController inputPlayerController,
                      DiceController inputDiceController,
                      PlayerTurnController inputDisplayWindowController,
-                     FinishGameWindowController inputFinishGameWindowController) {
+                     FinishGameWindowController inputFinishGameWindowController,
+                     MushroomAndTableController inputMushroomController) {
         tileController = inputTileController;
         playerController = inputPlayerController;
         diceController = inputDiceController;
         displayWindowController = inputDisplayWindowController;
         finishGameWindowController = inputFinishGameWindowController;
+        mushroomController=inputMushroomController;
         throwDiceCounter = 0;
-        winner = true;
+        firstBehindLine = true;
+        secondBehindLine = true;
+        thirdBehindLine = true;
     }
 
     public void start() {
@@ -55,45 +60,65 @@ public class MoveLogic {
         if(playerController.getPlayers()[i].getMoveType() == REROLL)
             playerController.getPlayers()[i].setMoveType(NORMAL);
 
-
-        TileType type = tileController.getBoard()[newPosition].getType();
-        switch (type) {
-            case RABBIT:
-                newPosition += 3;
-                break;
-            case MOUNTAIN:
-                playerController.getPlayers()[i].setMoveType(STAY);
-                break;
-            case WATERFALL:
-                playerController.getPlayers()[i].setMoveType(REROLL);
-                break;
-            case HILL:
-                newPosition -= playerController.getPlayers()[i].getBrownMushrooms();
-                break;
-            case VALLEY:
-                playerController.getPlayers()[i].setBrownMushrooms(playerController.getPlayers()[i].getBrownMushrooms() - 2);
-                break;
-            case THUNDER:
-                //TODO: implementation of switching baskets
-                break;
-            case BOAR:
-                playerController.getPlayers()[i].setMoveType(REROLLBACKWARDS);
-                break;
+        if(newPosition<37) {
+            TileType type = tileController.getBoard()[newPosition].getType();
+            switch (type) {
+                case RABBIT:
+                    newPosition += 3;
+                    break;
+                case MOUNTAIN:
+                    playerController.getPlayers()[i].setMoveType(STAY);
+                    break;
+                case WATERFALL:
+                    playerController.getPlayers()[i].setMoveType(REROLL);
+                    break;
+                case HILL:
+                    newPosition -= playerController.getPlayers()[i].getBoletusCounter();
+                    break;
+                case VALLEY:
+                    playerController.getPlayers()[i].setBoletusCounter(playerController.getPlayers()[i].getBoletusCounter() - 2);
+                    break;
+                case THUNDER:
+                    //TODO: implementation of switching baskets
+                    break;
+                case BOAR:
+                    playerController.getPlayers()[i].setMoveType(REROLLBACKWARDS);
+                    break;
+            }
         }
 
         playerController.getPlayers()[i].setPosition(newPosition);
         if (playerController.getPlayers()[i].getPosition() >= 36) {
             playerController.getPlayers()[i].setPosition(41);
-            if (winner) {
-                finishGameWindowController.setWinner(playerController.getPlayers()[i]);
-                winner = false;
+            if (firstBehindLine) {
+                playerController.getPlayers()[i].setBonus(3);
+                finishGameWindowController.getPlayers()[0]=playerController.getPlayers()[i];
+                firstBehindLine = false;
             }
-        } else
+            else {
+                if(secondBehindLine) {
+                    playerController.getPlayers()[i].setBonus(2);
+                    finishGameWindowController.getPlayers()[1]=playerController.getPlayers()[i];
+                    secondBehindLine = false;
+                }
+                else {
+                    if(thirdBehindLine) {
+                        playerController.getPlayers()[i].setBonus(1);
+                        finishGameWindowController.getPlayers()[2]=playerController.getPlayers()[i];
+                        thirdBehindLine = false;
+                    }
+                }
+            }
+        } else {
             playerController.moveThePlayer(playerController.getPlayers()[i].getType(), tileController);
+            finishGameWindowController.getPlayers()[3]=playerController.getPlayers()[i];
+        }
 
         if (playerController.getPlayers()[i].getMoveType() != REROLL &&
-                playerController.getPlayers()[i].getMoveType() != REROLLBACKWARDS)
+                playerController.getPlayers()[i].getMoveType() != REROLLBACKWARDS) {
+            mushroomController.changeMushroomVisibility(playerController.getPlayers()[i]);
             incrementThrowDiceCounter();
+        }
         visibleConfiguration();
 
         if (playerController.getPlayers()[getThrowDiceCounter()].getPosition() == 41)
@@ -109,14 +134,6 @@ public class MoveLogic {
     private boolean isPlayerEnd() {
         incrementThrowDiceCounter();
         return playerController.getPlayers()[getThrowDiceCounter()].getPosition() == 41;
-    }
-
-    private boolean isFree(int position) {
-        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            if (position == playerController.getPlayers()[i].getPosition())
-                return false;
-        }
-        return true;
     }
 
     private void visibleConfiguration() {

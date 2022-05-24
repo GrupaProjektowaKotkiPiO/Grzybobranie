@@ -10,8 +10,9 @@ public class Player {
     private ImageView playerOnBoard;
     private int position;
     private MoveType moveType;
-    private int brownMushrooms;
-    private int redMushrooms;
+    private int boletusCounter;
+    private int toadstoalCounter;
+    private int bonus;
 
     public Player(PlayerType inputType, String inputFirstName, String inputLastName, ImageView inputPlayerOnBoard) {
         type = inputType;
@@ -19,8 +20,9 @@ public class Player {
         lastName = inputLastName;
         playerOnBoard=inputPlayerOnBoard;
         position=0;
-        brownMushrooms =0;
-        redMushrooms =0;
+        boletusCounter=0;
+        toadstoalCounter=0;
+        bonus=0;
         moveType = NORMAL;
     }
 
@@ -53,19 +55,23 @@ public class Player {
         this.moveType = moveType;
     }
 
-    public int getBrownMushrooms() {
-        return brownMushrooms;
+    public int getBoletusCounter() {
+        return boletusCounter;
     }
 
-    public void setBrownMushrooms(int brownMushrooms) {
-        this.brownMushrooms = brownMushrooms;
+    public void setBoletusCounter(int boletusCounter) {
+        this.boletusCounter = boletusCounter;
     }
 
-    public int getRedMushrooms() {
-        return redMushrooms;
+    public int getToadstoalCounter() {
+        return toadstoalCounter;
     }
 
-    public void setRedMushrooms(int redMushrooms) {
-        this.redMushrooms = redMushrooms;
+    public void setToadstoalCounter(int toadstoalCounter) {
+        this.toadstoalCounter = toadstoalCounter;
     }
+
+    public int getBonus() { return bonus; }
+
+    public void setBonus(int bonus) { this.bonus = bonus; }
 }

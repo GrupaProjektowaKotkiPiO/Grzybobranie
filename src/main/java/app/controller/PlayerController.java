@@ -2,19 +2,18 @@ package app.controller;
 
 import app.dto.Player;
 import app.dto.PlayerType;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
+import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 
 public class PlayerController {
     private Player[] players;
 
-    public PlayerController(ObservableList<Node> group) {
+    public PlayerController(Group group) {
         players=new Player[4];
-        players[0]=new Player(PlayerType.PLAYER1,"Szymon","Jakubaszek",(ImageView)group.get(3));
-        players[1]=new Player(PlayerType.PLAYER2,"Daria","Glińska",(ImageView)group.get(2));
-        players[2]=new Player(PlayerType.PLAYER3,"Maciej","Sierzputowski",(ImageView)group.get(1));
-        players[3]=new Player(PlayerType.PLAYER4,"Pani","Doktor",(ImageView)group.get(0));
+        players[0]=new Player(PlayerType.PLAYER1,"Szymon","Jakubaszek",(ImageView)group.getChildren().get(3));
+        players[1]=new Player(PlayerType.PLAYER2,"Daria","Glińska",(ImageView)group.getChildren().get(2));
+        players[2]=new Player(PlayerType.PLAYER3,"Maciej","Sierzputowski",(ImageView)group.getChildren().get(1));
+        players[3]=new Player(PlayerType.PLAYER4,"Pani","Doktor",(ImageView)group.getChildren().get(0));
     }
 
     public void moveThePlayer(PlayerType type, TileController tileController) {

@@ -5,7 +5,7 @@
 .button {
     -fx-background-color:
     linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),
-    linear-gradient(#000000, #000000),
+    linear-gradient(#4a4439, #4a4439),
     linear-gradient(#fff6f6 0%, #c2c2c2 20%, #afafaf 80%, #fff6f6 100%),
     linear-gradient(#fff6f6 0%, #ffffff 50%, #ffffff 51%, #fff6f6 100%);
     -fx-background-insets: 0,1,4,5;
@@ -14,6 +14,6 @@
     -fx-font-family: "Lato Italic";
     -fx-font-size: 17px;
     -fx-font-weight: bold;
-    -fx-text-fill: #000000;
+    -fx-text-fill: #4a4439;
     -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
 }
