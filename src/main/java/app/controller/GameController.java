@@ -2,7 +2,6 @@ package app.controller;
 
 import app.service.MoveLogic;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -24,12 +23,20 @@ public class GameController {
         stage.setScene(scene);
         stage.show();
 
-        Group finishGameWindow=(Group)root.getChildren().get(9);
-        ObservableList<Node> players=((Group)root.getChildren().get(7)).getChildren();
-        ObservableList<Node> dice=((Group)root.getChildren().get(6)).getChildren();
-        ObservableList<Node> turnWindow=((Group)root.getChildren().get(5)).getChildren();
+        Group finishGameWindow= (Group) root.getChildren().get(13);
+        Group players= (Group) root.getChildren().get(11);
+        Group mushrooms= (Group) root.getChildren().get(10);
+        Group dice= (Group) root.getChildren().get(9);
+        Group turnWindow= (Group) root.getChildren().get(8);
+        Group table= (Group) root.getChildren().get(7);
 
-        (new MoveLogic(new TileController(), new PlayerController(players), new DiceController(dice), new PlayerTurnController(turnWindow), new FinishGameWindowController(finishGameWindow))).start();
+        (new MoveLogic(new TileController(),
+                new PlayerController(players),
+                new DiceController(dice),
+                new PlayerTurnController(turnWindow),
+                new FinishGameWindowController(finishGameWindow),
+                new MushroomAndTableController(mushrooms, table))).
+                start();
     }
 
     public void quit() {

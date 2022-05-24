@@ -8,15 +8,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="788.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.GameController">
+<AnchorPane prefHeight="792.0" prefWidth="1299.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.GameController">
     <children>
-        <Rectangle fill="#008037" height="788.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1175.0" />
-        <Rectangle fill="#e4f8ff" height="788.0" layoutX="815" width="482.0" />
-        <ImageView fitHeight="768.0" fitWidth="768.0" layoutX="20" layoutY="20" pickOnBounds="true" preserveRatio="true">
+        <Rectangle fill="#b3a997" height="792.0" stroke="#4a4439" strokeType="INSIDE" strokeWidth="4.0" width="1292.0" />
+        <ImageView fitHeight="784.0" fitWidth="1292.0" layoutX="4" layoutY="4" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../css/images/Background.png" />
+                <Image url="@../css/images/Background_2.png" />
             </image>
         </ImageView>
+        <Rectangle fill="#f9e8c9" height="792.0" layoutX="815" width="485.0" stroke="#4a4439" strokeType="INSIDE" strokeWidth="4.0"/>
+        <ImageView fitHeight="768.0" fitWidth="768.0" layoutX="20" layoutY="20" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../css/images/Background_1.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="45.0" layoutY="55.0" stylesheets="@../css/LabelOnBoard.css" text="START" />
+        <Label layoutX="695.0" layoutY="695.0" stylesheets="@../css/LabelOnBoard.css" text="FINISH" />
         <Label layoutX="947.0" layoutY="53.0" stylesheets="@../css/GameStatistics.css" text="Game statistics" />
         <Group layoutX="830.0" layoutY="110.0" stylesheets="@../css/Table.css">
             <children>
@@ -28,7 +35,7 @@
                 <Label layoutX="106.0" layoutY="23.0" text="Szymon" />
                 <Label layoutX="206.0" layoutY="23.0" text="Daria" />
                 <Label layoutX="298.0" layoutY="23.0" text="Maciej" />
-                <Label alignment="CENTER" layoutX="385.0" layoutY="14.0" prefWidth="57.0" text="Pani&#10;Doktor" />
+                <Label layoutX="385.0" layoutY="23.0" prefWidth="57.0" text="Pani" />
                 <Label alignment="CENTER" layoutX="99.0" layoutY="58.0" prefHeight="18.0" prefWidth="28.0" text="0" />
                 <Label alignment="CENTER" layoutX="99.0" layoutY="86.0" prefHeight="18.0" prefWidth="28.0" text="0" />
                 <Label alignment="CENTER" layoutX="99.0" layoutY="114.0" prefHeight="18.0" prefWidth="28.0" text="0" />
@@ -43,18 +50,173 @@
                 <Label alignment="CENTER" layoutX="386.0" layoutY="114.0" prefHeight="18.0" prefWidth="28.0" text="0" />
             </children>
         </Group>
-        <Group layoutX="910.0" layoutY="320.0" stylesheets="@../css/YourTurn.css">
+        <Group layoutX="915.0" layoutY="320.0" stylesheets="@../css/YourTurn.css">
             <children>
-                <Label alignment="CENTER" prefHeight="47.0" prefWidth="300.0" text="YOUR TURN!" />
-                <Label alignment="CENTER" layoutY="52.0" prefHeight="47.0" prefWidth="300.0" text="Szymon" />
+                <Rectangle fill="#ffffff" layoutX="15" layoutY="-15.0" height="250.0" width="250.0" />
+                <Label alignment="CENTER" layoutX="-5" prefHeight="47.0" prefWidth="300.0" text="YOUR TURN!" />
+                <Label alignment="CENTER" layoutX="-5" layoutY="35.0" prefHeight="47.0" prefWidth="300.0" text="Szymon" />
+                <ImageView fitHeight="340.0" fitWidth="340.0" layoutX="-60.0" layoutY="-60.0" pickOnBounds="true" preserveRatio="true" translateX="30">
+                    <image>
+                        <Image url="@../css/images/Frame.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="42.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true" translateX="30">
+                    <image>
+                        <Image url="@../css/images/Basket_1.png" />
+                    </image>
+                </ImageView>
             </children>
         </Group>
-        <Group layoutX="1010.0" layoutY="490.0">
+        <Group layoutX="1010.0" layoutY="600.0">
             <children>
-                <Button layoutY="80.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Move" />
+                <Button layoutY="100.0" layoutX="-1.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Move" />
                 <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="-15.0" pickOnBounds="true" preserveRatio="true" translateX="30">
                     <image>
                         <Image url="@../css/images/Dice_1.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Group>
+        <Group layoutX="58.0" layoutY="33.0" >
+            <children>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="91.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Muchomor.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="100.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="318.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="273.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="202.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="328.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Muchomor.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="424.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="464.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Muchomor.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="597.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="658.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="654.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Muchomor.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="572.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="454.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Muchomor.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="245.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="141.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="35.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Muchomor.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="11.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="198.0" layoutY="653.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Muchomor.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="318.0" layoutY="651.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="244.0" layoutY="535.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="137.0" layoutY="506.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="186.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="305.0" layoutY="399.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Muchomor.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="554.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="632.0" layoutY="482.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="526.0" layoutY="537.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Muchomor.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="528.0" layoutY="638.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Borowik.png" />
                     </image>
                 </ImageView>
             </children>
@@ -83,24 +245,45 @@
                 </ImageView>
             </children>
         </Group>
-        <Group layoutX="950" layoutY="700.0">
+        <Group layoutX="889" layoutY="700.0">
             <children>
                 <Button mnemonicParsing="false" onAction="#quit" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Quit" />
-                <Button layoutX="120.0" mnemonicParsing="false" onAction="#restart" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Restart" />
+                <Button layoutX="240.0" mnemonicParsing="false" onAction="#restart" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Restart" />
             </children>
         </Group>
         <Group visible="false">
             <children>
-                <Rectangle height="788.0" opacity="0.81" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1291.0" />
-                <Rectangle fill="#e4f8ff" height="400.0" layoutX="384.0" layoutY="194.0" strokeWidth="0.0" width="482.0" />
-                <Button layoutX="498.0" layoutY="505.0" mnemonicParsing="false" onAction="#quit" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Quit" />
-                <Button layoutX="667.0" layoutY="505.0" mnemonicParsing="false" onAction="#restart" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Restart" />
-                <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="550.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
+                <Rectangle height="788.0" opacity="0.81" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1300.0" />
+                <Rectangle fill="#f9e8c9" height="470.0" layoutX="415.0" layoutY="150.0" width="500.0 " stroke="#4a4439" strokeType="INSIDE" strokeWidth="4.0"/>
+                <ImageView fitHeight="300.0" fitWidth="800.0" layoutX="515.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../css/images/Basket_4.png" />
+                        <Image url="@../css/images/Podium_2.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="537.0" layoutY="241.0" stylesheets="@../css/GameStatistics.css" text="Tomek win!" />
+                <Button layoutX="528.0" layoutY="525.0" mnemonicParsing="false" onAction="#quit" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Quit" />
+                <Button layoutX="697.0" layoutY="525.0" mnemonicParsing="false" onAction="#restart" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="Restart" />
+                <ImageView fitHeight="115.0" fitWidth="115.0" layoutX="505.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Basket_1.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="517.0" layoutY="245.0" stylesheets="@../css/finishGameWindow.css" text="Szymon" />
+                <ImageView fitHeight="115.0" fitWidth="115.0" layoutX="610.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Basket_2.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="635.0" layoutY="193.0" stylesheets="@../css/finishGameWindow.css" text="Daria" />
+                <ImageView fitHeight="115.0" fitWidth="115.0" layoutX="710.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../css/images/Basket_3.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="735.0" layoutY="257.0" stylesheets="@../css/finishGameWindow.css" text="Maciej" />
+
+                <Label layoutX="555.0" layoutY="332.0" stylesheets="@../css/finishGameWindow.css" text="0" />
+                <Label layoutX="660.0" layoutY="280.0" stylesheets="@../css/finishGameWindow.css" text="0" />
+                <Label layoutX="760.0" layoutY="348.0" stylesheets="@../css/finishGameWindow.css" text="0" />
             </children>
         </Group>
     </children>

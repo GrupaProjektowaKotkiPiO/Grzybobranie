@@ -2,6 +2,7 @@ package app.controller;
 
 import app.dto.Dice;
 import javafx.collections.ObservableList;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -11,9 +12,9 @@ public class DiceController {
     private Dice dice;
     private Button moveButton;
 
-    public DiceController(ObservableList<Node> group) {
-        moveButton = (Button) group.get(0);
-        dice = new Dice((ImageView) group.get(1));
+    public DiceController(Group group) {
+        moveButton = (Button) group.getChildren().get(0);
+        dice = new Dice((ImageView) group.getChildren().get(1));
     }
 
     public int throwTheDice() {

@@ -1,10 +1,10 @@
 @font-face {
-    src: url("fonts/Lato-Italic.ttf");
+    src: url("fonts/FrostbiteBossFight-dL0Z.ttf");
 }
 
 .label {
-    -fx-font-family: "Lato Italic";
-    -fx-font-size: 12;
+    -fx-font-family: "Frostbite Boss Fight";
+    -fx-font-size: 14;
     -fx-font-weight: bold;
     -fx-text-fill: #ffffff;
 }
