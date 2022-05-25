@@ -1,14 +1,14 @@
 package app.dto;
 
 public class Tile {
-    private TileType type;
-    private double basketX;
-    private double basketY;
+    private final TileType type;
+    private final double basketX;
+    private final double basketY;
 
     public Tile(TileType inputType, double inputBasketX, double inputBasketY) {
-        type=inputType;
-        basketX=inputBasketX;
-        basketY=inputBasketY;
+        type = inputType;
+        basketX = inputBasketX;
+        basketY = inputBasketY;
     }
 
     public TileType getType() {
