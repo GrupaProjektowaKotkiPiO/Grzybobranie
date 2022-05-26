@@ -6,8 +6,8 @@ import app.dto.TileType;
 import static app.dto.MoveType.*;
 
 public class MoveLogic {
-    public static int NUMBER_OF_PLAYERS = 4;
-    public static int OUT_OF_BOARD = 41;
+    public final static int NUMBER_OF_PLAYERS = 4;
+    public static int OUT_OF_BOARD = 41; //dodac final
     public static int FINISH_LINE = 36;
     private final TileController tileController;
     private final PlayerController playerController;
@@ -63,7 +63,7 @@ public class MoveLogic {
         if (playerController.getPlayers()[i].getMoveType() == REROLL)
             playerController.getPlayers()[i].setMoveType(NORMAL);
 
-        if (newPosition < 37) {
+        if (newPosition < FINISH_LINE) {
             TileType type = tileController.getBoard()[newPosition].getType();
             switch (type) {
                 case RABBIT:
@@ -116,7 +116,7 @@ public class MoveLogic {
                         //finishGameWindowController.getPlayers()[2] = playerController.getPlayers()[i];
                         thirdBehindLine = false;
                     }
-                }
+                }//do poprawy ify
             }
         } else {
             playerController.moveThePlayer(playerController.getPlayers()[i].getType(), tileController);

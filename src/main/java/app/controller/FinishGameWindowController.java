@@ -28,7 +28,6 @@ public class FinishGameWindowController {
             for (int j = 0; j < player.length - i - 1; j++) {
                 int result1 = player[j].getScore();
                 int result2 = player[j + 1].getScore();
-                System.out.println(result1 + " " + result2);
                 if (result1 < result2 || (result1 == result2 && player[j].getOrderAtEnd() < player[j + 1].getOrderAtEnd())) {
                     Player temp = player[j];
                     player[j] = player[j + 1];

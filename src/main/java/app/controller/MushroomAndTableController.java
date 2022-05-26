@@ -60,7 +60,7 @@ public class MushroomAndTableController {
                         j = 0;
                         break;
                     case PLAYER2:
-                        j = 1;
+                        j = 1;// umiejscowienie grzybkow i enum
                         break;
                     case PLAYER3:
                         j = 2;

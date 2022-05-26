@@ -19,10 +19,11 @@ public class DiceController {
 
     public int throwTheDice() {
         dice.throwTheDice();
+        //ify z klamerkami!
 
         switch (dice.getResultOfThrowingDice()) {
             case 1:
-                dice.getDiceTile().setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Dice_1.png"))));
+                dice.getDiceTile().setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Dice_1.png")))); //konkatenacja stringow
                 break;
             case 2:
                 dice.getDiceTile().setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Dice_2.png"))));
