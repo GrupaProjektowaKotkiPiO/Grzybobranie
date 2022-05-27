@@ -21,25 +21,7 @@ public class DiceController {
         dice.throwTheDice();
         //ify z klamerkami!
 
-        switch (dice.getResultOfThrowingDice()) {
-            case 1:
-                dice.getDiceTile().setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Dice_1.png")))); //konkatenacja stringow
-                break;
-            case 2:
-                dice.getDiceTile().setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Dice_2.png"))));
-                break;
-            case 3:
-                dice.getDiceTile().setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Dice_3.png"))));
-                break;
-            case 4:
-                dice.getDiceTile().setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Dice_4.png"))));
-                break;
-            case 5:
-                dice.getDiceTile().setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Dice_5.png"))));
-                break;
-            default:
-                dice.getDiceTile().setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Dice_6.png"))));
-        }
+        dice.getDiceTile().setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Dice_"+dice.getResultOfThrowingDice()+".png")))); //konkatenacja stringow
 
         return dice.getResultOfThrowingDice();
     }
