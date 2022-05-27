@@ -1,7 +1,6 @@
 @font-face {
     src: url("fonts/FrostbiteBossFight-dL0Z.ttf");
 }
-
 .label {
     -fx-font-family: "Frostbite Boss Fight";
     -fx-font-size: 30;

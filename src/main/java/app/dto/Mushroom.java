@@ -5,9 +5,9 @@ import javafx.scene.image.ImageView;
 import java.util.Random;
 
 public class Mushroom {
-    private MushroomType type;
-    private ImageView mushroomOnBoard;
-    private int positionOnBoard;
+    private final MushroomType type;
+    private final ImageView mushroomOnBoard;
+    private final int positionOnBoard;
 
     public Mushroom(MushroomType type, ImageView mushroomOnBoard, int position) {
         this.type = type;

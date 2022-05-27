@@ -6,72 +6,60 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
 public class FinishGameWindowController {
-    private Player players[];
+    private Player[] players;
     private Player firstPlacePlayer;
     private Player secondPlacePlayer;
     private Player thirdPlacePlayer;
-    private int firstPlaceScore;
-    private int secondPlaceScore;
-    private int thirdPlaceScore;
-    private Group window;
+    private final Group window;
 
     public FinishGameWindowController(Group window) {
-        firstPlacePlayer=null;
-        secondPlacePlayer=null;
-        thirdPlacePlayer=null;
-        this.window=window;
-        players=new Player[4];
+        this.window = window;
+        players = new Player[4];
     }
 
     public void show() {
-        firstPlaceScore=-10;
-        secondPlaceScore=-11;
-        thirdPlaceScore=-12;
-
-        for (int i=0; i<4; i++)
-            positionOnPodium(players[i]);
-
+        setPositionsOnPodium(players);
         window.setVisible(true);
     }
 
-    public void positionOnPodium(Player player) {
-        int result = player.getBoletusCounter() - player.getToadstoalCounter() + player.getBonus();
-        if (result > firstPlaceScore) {
-            firstPlaceScore=result;
+    public void setPositionsOnPodium(Player[] player) {
 
-            if(firstPlacePlayer !=null)
-                positionOnPodium(firstPlacePlayer);
-            firstPlacePlayer=player;
-
-            ((ImageView) window.getChildren().get(7)).setImage(player.getPlayerOnBoard().getImage());
-            ((Label) window.getChildren().get(8)).setText(player.getFirstName());
-            ((Label) window.getChildren().get(12)).setText(Integer.toString(result));
-        } else {
-            if (result > secondPlaceScore) {
-                secondPlaceScore = result;
-
-                if(secondPlacePlayer !=null)
-                    positionOnPodium(secondPlacePlayer);
-                secondPlacePlayer =player;
-
-                ((ImageView) window.getChildren().get(5)).setImage(player.getPlayerOnBoard().getImage());
-                ((Label) window.getChildren().get(6)).setText(player.getFirstName());
-                ((Label) window.getChildren().get(11)).setText(Integer.toString(result));
-            } else {
-                if (result > thirdPlaceScore) {
-                    thirdPlaceScore = result;
-
-                    if(thirdPlacePlayer !=null)
-                        positionOnPodium(thirdPlacePlayer);
-                    thirdPlacePlayer =player;
-
-                    ((ImageView) window.getChildren().get(9)).setImage(player.getPlayerOnBoard().getImage());
-                    ((Label) window.getChildren().get(10)).setText(player.getFirstName());
-                    ((Label) window.getChildren().get(13)).setText(Integer.toString(result));
+        for (int i = 0; i < player.length; i++) {   //bubble sort
+            for (int j = 0; j < player.length - i - 1; j++) {
+                int result1 = player[j].getScore();
+                int result2 = player[j + 1].getScore();
+                if (result1 < result2 || (result1 == result2 && player[j].getOrderAtEnd() < player[j + 1].getOrderAtEnd())) {
+                    Player temp = player[j];
+                    player[j] = player[j + 1];
+                    player[j + 1] = temp;
                 }
             }
         }
+        firstPlacePlayer = player[0];
+        secondPlacePlayer = player[1];
+        thirdPlacePlayer = player[2];
+
+        setPlayersOnPodium();
     }
 
-    public Player[] getPlayers() { return players; }
+    public void setPlayersOnPodium() {
+        ((ImageView) window.getChildren().get(7)).setImage(firstPlacePlayer.getPlayerOnBoard().getImage());
+        ((Label) window.getChildren().get(8)).setText(firstPlacePlayer.getFirstName());
+        ((Label) window.getChildren().get(12)).setText(Integer.toString(firstPlacePlayer.getScore()));
+
+        ((ImageView) window.getChildren().get(5)).setImage(secondPlacePlayer.getPlayerOnBoard().getImage());
+        ((Label) window.getChildren().get(6)).setText(secondPlacePlayer.getFirstName());
+        ((Label) window.getChildren().get(11)).setText(Integer.toString(secondPlacePlayer.getScore()));
+
+        ((ImageView) window.getChildren().get(9)).setImage(thirdPlacePlayer.getPlayerOnBoard().getImage());
+        ((Label) window.getChildren().get(10)).setText(thirdPlacePlayer.getFirstName());
+        ((Label) window.getChildren().get(13)).setText(Integer.toString(thirdPlacePlayer.getScore()));
+    }
+
+    public Player[] getPlayers() {
+        return players;
+    }
+    public void setPlayers(Player [] players){
+        this.players = players;
+    }
 }

@@ -1,28 +1,30 @@
 package app.dto;
 
 import javafx.scene.image.ImageView;
+
 import static app.dto.MoveType.*;
 
 public class Player {
     PlayerType type;
     String firstName;
     String lastName;
-    private ImageView playerOnBoard;
+    private final ImageView playerOnBoard;
     private int position;
     private MoveType moveType;
     private int boletusCounter;
     private int toadstoalCounter;
-    private int bonus;
+    private int score;
+    private int orderAtEnd;
 
     public Player(PlayerType inputType, String inputFirstName, String inputLastName, ImageView inputPlayerOnBoard) {
         type = inputType;
         firstName = inputFirstName;
         lastName = inputLastName;
-        playerOnBoard=inputPlayerOnBoard;
-        position=0;
-        boletusCounter=0;
-        toadstoalCounter=0;
-        bonus=0;
+        playerOnBoard = inputPlayerOnBoard;
+        position = 0;
+        boletusCounter = 0;
+        toadstoalCounter = 0;
+        orderAtEnd = 0;
         moveType = NORMAL;
     }
 
@@ -49,7 +51,10 @@ public class Player {
     public void setPosition(int position) {
         this.position = position;
     }
-    public MoveType getMoveType() {return moveType;}
+
+    public MoveType getMoveType() {
+        return moveType;
+    }
 
     public void setMoveType(MoveType moveType) {
         this.moveType = moveType;
@@ -71,7 +76,19 @@ public class Player {
         this.toadstoalCounter = toadstoalCounter;
     }
 
-    public int getBonus() { return bonus; }
+    public int getOrderAtEnd() {
+        return orderAtEnd;
+    }
 
-    public void setBonus(int bonus) { this.bonus = bonus; }
+    public void setOrderAtEnd(int orderAtEnd) {
+        this.orderAtEnd = orderAtEnd;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }
