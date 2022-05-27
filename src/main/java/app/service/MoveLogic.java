@@ -79,7 +79,7 @@ public class MoveLogic {
                     newPosition -= playerController.getPlayers()[i].getBoletusCounter();
                     break;
                 case VALLEY:
-                    if (playerController.getPlayers()[i].getBoletusCounter()  >= 2)
+                    if (playerController.getPlayers()[i].getBoletusCounter() >= 2)
                         playerController.getPlayers()[i].setBoletusCounter(playerController.getPlayers()[i].getBoletusCounter() - 2);
                     else if (playerController.getPlayers()[i].getBoletusCounter() == 1)
                         playerController.getPlayers()[i].setBoletusCounter(playerController.getPlayers()[i].getBoletusCounter() - 1);
@@ -87,9 +87,9 @@ public class MoveLogic {
                         playerController.getPlayers()[i].setBoletusCounter(0);
                     break;
                 case THUNDER:
-                    if(playerController.getPlayers()[i].getBoletusCounter()>0)
+                    if (playerController.getPlayers()[i].getBoletusCounter() > 0)
                         playerController.getPlayers()[i].setBoletusCounter(playerController.getPlayers()[i].getBoletusCounter() - 1);
-                    if(playerController.getPlayers()[i].getToadstoalCounter()>0)
+                    if (playerController.getPlayers()[i].getToadstoalCounter() > 0)
                         playerController.getPlayers()[i].setToadstoalCounter(playerController.getPlayers()[i].getToadstoalCounter() - 1);
                     break;
                 case BOAR:
@@ -103,24 +103,17 @@ public class MoveLogic {
             playerController.getPlayers()[i].setPosition(OUT_OF_BOARD);
             if (firstBehindLine) {
                 playerController.getPlayers()[i].setOrderAtEnd(3);
-                //finishGameWindowController.getPlayers()[0] = playerController.getPlayers()[i];
                 firstBehindLine = false;
-            } else {
-                if (secondBehindLine) {
-                    playerController.getPlayers()[i].setOrderAtEnd(2);
-                    //finishGameWindowController.getPlayers()[1] = playerController.getPlayers()[i];
-                    secondBehindLine = false;
-                } else {
-                    if (thirdBehindLine) {
-                        playerController.getPlayers()[i].setOrderAtEnd(1);
-                        //finishGameWindowController.getPlayers()[2] = playerController.getPlayers()[i];
-                        thirdBehindLine = false;
-                    }
-                }//do poprawy ify
-            }
+            } else if (secondBehindLine){
+                playerController.getPlayers()[i].setOrderAtEnd(2);
+                secondBehindLine = false;
+            } else if (thirdBehindLine){
+                playerController.getPlayers()[i].setOrderAtEnd(1);
+                thirdBehindLine = false;
+                }
+            //do poprawy ify
         } else {
             playerController.moveThePlayer(playerController.getPlayers()[i].getType(), tileController);
-            //finishGameWindowController.getPlayers()[3] = playerController.getPlayers()[i];
         }
 
         if (playerController.getPlayers()[i].getMoveType() != REROLL &&
@@ -148,15 +141,15 @@ public class MoveLogic {
     private void visibleConfiguration() {
         if (throwDiceCounter < NUMBER_OF_PLAYERS) {
             playerController.getPlayers()[getThrowDiceCounter()].getPlayerOnBoard().setVisible(true);
-            for (int i = 3; i > throwDiceCounter; i--)
+            for (int i = 3; i > throwDiceCounter; i--) {
                 playerController.getPlayers()[i].getPlayerOnBoard().setVisible(false);
+            }
         }
 
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             if (playerController.getPlayers()[i].getPosition() == OUT_OF_BOARD) {
                 playerController.getPlayers()[i].getPlayerOnBoard().setVisible(false);
             }
-
         }
     }
 
