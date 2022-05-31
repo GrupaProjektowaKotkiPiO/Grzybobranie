@@ -20,6 +20,7 @@ public class MoveLogic {
     private boolean thirdBehindLine;
     private int throwDiceCounter;
 
+    // class constructor
     public MoveLogic(TileController inputTileController,
                      PlayerController inputPlayerController,
                      DiceController inputDiceController,
@@ -38,6 +39,7 @@ public class MoveLogic {
         thirdBehindLine = true;
     }
 
+    //
     public void start() {
         visibleConfiguration();
         diceController.getMoveButton().setOnMousePressed(e -> {

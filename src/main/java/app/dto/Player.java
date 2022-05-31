@@ -16,6 +16,7 @@ public class Player {
     private int score;
     private int orderAtEnd;
 
+    // class constructor -> creates the new pklayer with position on board at start tile and score 0
     public Player(PlayerType inputType, String inputFirstName, String inputLastName, ImageView inputPlayerOnBoard) {
         type = inputType;
         firstName = inputFirstName;

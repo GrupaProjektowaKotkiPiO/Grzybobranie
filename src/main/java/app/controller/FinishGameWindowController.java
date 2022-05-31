@@ -12,19 +12,23 @@ public class FinishGameWindowController {
     private Player thirdPlacePlayer;
     private final Group window;
 
+    // class constructor -> sets the group based on group from fxml file, creates Player class table
     public FinishGameWindowController(Group window) {
         this.window = window;
         players = new Player[4];
     }
 
+    // sums up the game using setPositionsOnPodium() method, changes visibility of the Group
     public void show() {
         setPositionsOnPodium(players);
         window.setVisible(true);
     }
 
+    // sums up the game
     public void setPositionsOnPodium(Player[] player) {
 
-        for (int i = 0; i < player.length; i++) {   //bubble sort
+        // sorting players descending using bubble sort
+        for (int i = 0; i < player.length; i++) {
             for (int j = 0; j < player.length - i - 1; j++) {
                 int result1 = player[j].getScore();
                 int result2 = player[j + 1].getScore();
@@ -42,6 +46,7 @@ public class FinishGameWindowController {
         setPlayersOnPodium();
     }
 
+    // sets the window look (correct information about who took which place n the game)
     public void setPlayersOnPodium() {
         ((ImageView) window.getChildren().get(7)).setImage(firstPlacePlayer.getPlayerOnBoard().getImage());
         ((Label) window.getChildren().get(8)).setText(firstPlacePlayer.getFirstName());

@@ -6,6 +6,7 @@ import app.dto.TileType;
 public class TileController {
     private final Tile[] board;
 
+    // class constructor -> sets tiles
     public TileController() {
         board = new Tile[37];
         board[0] = new Tile(TileType.START, 81, 71);

@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 public class MushroomPicking extends Application {
+
+    // method to start the game window
+    // loads view from fxml file
     @Override
     public void start(Stage stage) {
         try {
@@ -41,6 +44,8 @@ public class MushroomPicking extends Application {
         }
     }
 
+    // main method -> starts the program
+    // launch() method starts the start() method
     public static void main(String[] args) {
         launch();
     }

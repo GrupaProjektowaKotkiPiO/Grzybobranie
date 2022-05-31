@@ -22,11 +22,12 @@ public class MushroomAndTableController {
     static private final int TABLE_ROWS = 3;
     static private final int TABLE_COLUMNS = 4;
 
-
+    // class constructor -> creates all mushrooms and table
     public MushroomAndTableController(Group inputMushrooms, Group inputTable) {
         mushrooms = new Mushroom[NUMBER_OF_MUSHROOMS];
         scoreTable = new Label[TABLE_ROWS][TABLE_COLUMNS];
 
+        // mushrooms initialization
         for (int i = 0, j = 1; i < NUMBER_OF_MUSHROOMS; i++) {
             if (i == 0 || i == 6 || i == 8 || i == 11 || i == 13 || i == 16 || i == 18 || i == 23 || i == 26) {
                 mushrooms[i] = new Mushroom(MushroomType.TOADSTOAL, (ImageView) inputMushrooms.getChildren().get(i), j);
@@ -41,6 +42,7 @@ public class MushroomAndTableController {
             }
         }
 
+        // score table initialization
         for (int i = 5, j = 0; i < 17 && j < TABLE_COLUMNS; j++) {
             for (int k = 0; k < TABLE_ROWS; k++, i++) {
                 scoreTable[k][j] = (Label) inputTable.getChildren().get(i);
@@ -48,6 +50,7 @@ public class MushroomAndTableController {
         }
     }
 
+    // collecting the mushroom -> player gets/loses points & mushroom disappear
     public void changeMushroomVisibility(Player player) {
         for (int i = 0; i < NUMBER_OF_MUSHROOMS; i++) {
             if (mushrooms[i].getPositionOnBoard() == player.getPosition() && mushrooms[i].getMushroomOnBoard().isVisible()) {

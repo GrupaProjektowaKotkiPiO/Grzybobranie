@@ -15,6 +15,7 @@ import java.util.Objects;
 
 public class GameController {
 
+    // method combined with Restart button -> loads game again
     public void restart(ActionEvent event) throws IOException {
         Pane root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxml/Game.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -39,6 +40,7 @@ public class GameController {
                 start();
     }
 
+    // combined with Quit button -> exits program
     public void quit() {
         Platform.exit();
         System.exit(0);

@@ -12,6 +12,7 @@ public class Dice {
         diceTile = inputDiceTile;
     }
 
+    // generates the number of the tiles to go
     public void throwTheDice() {
         Random number = new Random();
         resultOfThrowingDice = number.nextInt(6) + 1;
