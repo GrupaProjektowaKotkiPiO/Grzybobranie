@@ -19,7 +19,6 @@ public class DiceController {
 
     public int throwTheDice() {
         dice.throwTheDice();
-        //ify z klamerkami!
 
         dice.getDiceTile().setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Dice_"+dice.getResultOfThrowingDice()+".png")))); //konkatenacja stringow
 

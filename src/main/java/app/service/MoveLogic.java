@@ -7,7 +7,7 @@ import static app.dto.MoveType.*;
 
 public class MoveLogic {
     public final static int NUMBER_OF_PLAYERS = 4;
-    public static int OUT_OF_BOARD = 41; //dodac final
+    public final static int OUT_OF_BOARD = 41;
     public static int FINISH_LINE = 36;
     private final TileController tileController;
     private final PlayerController playerController;
@@ -60,8 +60,9 @@ public class MoveLogic {
             newPosition = playerController.getPlayers()[i].getPosition() - diceController.throwTheDice();
             playerController.getPlayers()[i].setMoveType(NORMAL);
         }
-        if (playerController.getPlayers()[i].getMoveType() == REROLL)
+        if (playerController.getPlayers()[i].getMoveType() == REROLL) {
             playerController.getPlayers()[i].setMoveType(NORMAL);
+        }
 
         if (newPosition < FINISH_LINE) {
             TileType type = tileController.getBoard()[newPosition].getType();
@@ -111,7 +112,7 @@ public class MoveLogic {
                 playerController.getPlayers()[i].setOrderAtEnd(1);
                 thirdBehindLine = false;
                 }
-            //do poprawy ify
+            //todo do poprawy ify
         } else {
             playerController.moveThePlayer(playerController.getPlayers()[i].getType(), tileController);
         }
@@ -123,13 +124,16 @@ public class MoveLogic {
         }
         visibleConfiguration();
 
-        if (playerController.getPlayers()[getThrowDiceCounter()].getPosition() == OUT_OF_BOARD)
-            if (isTheEndOfTheGame()) finishGameWindowController.show();
+        if (playerController.getPlayers()[getThrowDiceCounter()].getPosition() == OUT_OF_BOARD && isTheEndOfTheGame()) {
+                finishGameWindowController.show();
+        }
     }
 
     private boolean isTheEndOfTheGame() {
         int j = 0;
-        while (j < NUMBER_OF_PLAYERS && isPlayerEnd()) j++;
+        while (j < NUMBER_OF_PLAYERS && isPlayerEnd()) {
+            j++;
+        }
         return j == NUMBER_OF_PLAYERS;
     }
 
