@@ -28,17 +28,17 @@ public class MushroomAndTableController {
         scoreTable = new Label[TABLE_ROWS][TABLE_COLUMNS];
 
         // mushrooms initialization
-        for (int i = 0, j = 1; i < NUMBER_OF_MUSHROOMS; i++) {
-            if (i == 0 || i == 6 || i == 8 || i == 11 || i == 13 || i == 16 || i == 18 || i == 23 || i == 26) {
-                mushrooms[i] = new Mushroom(MushroomType.TOADSTOAL, (ImageView) inputMushrooms.getChildren().get(i), j);
+        for (int index = 0, pos = 1; index < NUMBER_OF_MUSHROOMS; index++) {
+            if (index == 0 || index == 6 || index == 8 || index == 11 || index == 13 || index == 16 || index == 18 || index == 23 || index == 26) {
+                mushrooms[index] = new Mushroom(MushroomType.TOADSTOAL, (ImageView) inputMushrooms.getChildren().get(index), pos);
             }
             else {
-                mushrooms[i] = new Mushroom(MushroomType.BOLETUS, (ImageView) inputMushrooms.getChildren().get(i), j);
+                mushrooms[index] = new Mushroom(MushroomType.BOLETUS, (ImageView) inputMushrooms.getChildren().get(index), pos);
             }
 
-            j += 1;
-            if (j == 4 || j == 11 || j == 17 || j == 21 || j == 23 || j == 26 || j == 31) {
-                j += 1;
+            pos++;
+            if (pos == 4 || pos == 11 || pos == 17 || pos == 21 || pos == 23 || pos == 26 || pos == 31) {
+                pos++;
             }
         }
 
@@ -63,24 +63,10 @@ public class MushroomAndTableController {
                     player.setToadstoalCounter(player.getToadstoalCounter() + 1);
                 }
 
-                int j;
-                switch (player.getType()) {
-                    case PLAYER1:
-                        j = 0;
-                        break;
-                    case PLAYER2:
-                        j = 1;// umiejscowienie grzybkow i enum
-                        break;
-                    case PLAYER3:
-                        j = 2;
-                        break;
-                    default:
-                        j = 3;
-                        break;
-                }
-                scoreTable[0][j].setText(Integer.toString(player.getBoletusCounter()));
-                scoreTable[1][j].setText(Integer.toString(player.getToadstoalCounter()));
-                scoreTable[2][j].setText(Integer.toString(player.getBoletusCounter() - player.getToadstoalCounter()));
+                int index = player.getType().getIndex();
+                scoreTable[0][index].setText(Integer.toString(player.getBoletusCounter()));
+                scoreTable[1][index].setText(Integer.toString(player.getToadstoalCounter()));
+                scoreTable[2][index].setText(Integer.toString(player.getBoletusCounter() - player.getToadstoalCounter()));
                 player.setScore(player.getBoletusCounter() - player.getToadstoalCounter()); //todo tutaj wyjasnic
 
             }

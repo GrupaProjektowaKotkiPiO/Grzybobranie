@@ -20,28 +20,28 @@ public class FinishGameWindowController {
 
     // sums up the game using setPositionsOnPodium() method, changes visibility of the Group
     public void show() {
-        setPositionsOnPodium(players);
+        setPositionsOnPodium();
         window.setVisible(true);
     }
 
     // sums up the game
-    public void setPositionsOnPodium(Player[] player) {
+    public void setPositionsOnPodium() {
 
         // sorting players descending using bubble sort
-        for (int i = 0; i < player.length; i++) {
-            for (int j = 0; j < player.length - i - 1; j++) {
-                int result1 = player[j].getScore();
-                int result2 = player[j + 1].getScore();
-                if (result1 < result2 || (result1 == result2 && player[j].getOrderAtEnd() < player[j + 1].getOrderAtEnd())) {
-                    Player temp = player[j];
-                    player[j] = player[j + 1];
-                    player[j + 1] = temp;
+        for (int i = 0; i < players.length; i++) {
+            for (int j = 0; j < players.length - i - 1; j++) {
+                int result1 = players[j].getScore();
+                int result2 = players[j + 1].getScore();
+                if (result1 < result2 || (result1 == result2 && players[j].getOrderAtEnd() < players[j + 1].getOrderAtEnd())) {
+                    Player temp = players[j];
+                    players[j] = players[j + 1];
+                    players[j + 1] = temp;
                 }
             }
         }
-        firstPlacePlayer = player[0];
-        secondPlacePlayer = player[1];
-        thirdPlacePlayer = player[2];
+        firstPlacePlayer = players[0];
+        secondPlacePlayer = players[1];
+        thirdPlacePlayer = players[2];
 
         setPlayersOnPodium();
     }
@@ -61,9 +61,6 @@ public class FinishGameWindowController {
         ((Label) window.getChildren().get(13)).setText(Integer.toString(thirdPlacePlayer.getScore()));
     }
 
-    public Player[] getPlayers() {
-        return players;
-    }
     public void setPlayers(Player [] players){
         this.players = players;
     }

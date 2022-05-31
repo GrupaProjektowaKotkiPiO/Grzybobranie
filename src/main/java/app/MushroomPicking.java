@@ -23,6 +23,7 @@ public class MushroomPicking extends Application {
             stage.centerOnScreen();
             stage.setScene(scene);
             stage.show();
+            stage.setResizable(false);
 
             Group finishGameWindow = (Group) root.getChildren().get(13);
             Group players = (Group) root.getChildren().get(11);

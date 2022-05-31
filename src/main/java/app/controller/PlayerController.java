@@ -19,19 +19,7 @@ public class PlayerController {
 
     // changes player position on board
     public void moveThePlayer(PlayerType type, TileController tileController) {
-        switch (type) {
-            case PLAYER1:
-                setPositionOnBoard(players[0], tileController);
-                break;
-            case PLAYER2:
-                setPositionOnBoard(players[1], tileController);
-                break;
-            case PLAYER3:
-                setPositionOnBoard(players[2], tileController);
-                break;
-            default:
-                setPositionOnBoard(players[3], tileController);
-        }
+        setPositionOnBoard(players[type.getIndex()], tileController);
     }
 
     // sets the new player position

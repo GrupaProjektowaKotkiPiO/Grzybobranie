@@ -9,24 +9,19 @@ public class Player {
     String firstName;
     String lastName;
     private final ImageView playerOnBoard;
-    private int position;
-    private MoveType moveType;
-    private int boletusCounter;
-    private int toadstoalCounter;
-    private int score;
-    private int orderAtEnd;
+    private int position = 0;
+    private MoveType moveType = NORMAL;
+    private int boletusCounter = 0;
+    private int toadstoalCounter = 0;
+    private int score = 0;
+    private int orderAtEnd = 0;
 
     // class constructor -> creates the new pklayer with position on board at start tile and score 0
-    public Player(PlayerType inputType, String inputFirstName, String inputLastName, ImageView inputPlayerOnBoard) {
-        type = inputType;
-        firstName = inputFirstName;
-        lastName = inputLastName;
-        playerOnBoard = inputPlayerOnBoard;
-        position = 0;
-        boletusCounter = 0;
-        toadstoalCounter = 0;
-        orderAtEnd = 0;
-        moveType = NORMAL;
+    public Player(PlayerType type, String firstName, String lastName, ImageView playerOnBoard) {
+        this.type = type;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.playerOnBoard = playerOnBoard;
     }
 
     public PlayerType getType() {
