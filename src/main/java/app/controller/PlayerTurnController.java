@@ -21,6 +21,6 @@ public class PlayerTurnController {
     // changes the current player name & image (player whose turn it is)
     public void changePlayerInWindow(Player player) {
         turnLabel.setText(player.getFirstName());
-        turnImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Basket_" + (player.getType().getIndex() + 1)  + ".png"))));
+        turnImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Basket_" + (player.getType().ordinal() + 1)  + ".png"))));
     }
 }

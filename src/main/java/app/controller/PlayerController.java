@@ -19,7 +19,7 @@ public class PlayerController {
 
     // changes player position on board
     public void moveThePlayer(PlayerType type, TileController tileController) {
-        setPositionOnBoard(players[type.getIndex()], tileController);
+        setPositionOnBoard(players[type.ordinal()], tileController);
     }
 
     // sets the new player position
