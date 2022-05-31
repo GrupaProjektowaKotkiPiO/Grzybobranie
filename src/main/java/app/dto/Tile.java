@@ -5,6 +5,7 @@ public class Tile {
     private final double basketX;
     private final double basketY;
 
+    // class constructor -> creates new tile of specific type & sets basket cords
     public Tile(TileType inputType, double inputBasketX, double inputBasketY) {
         type = inputType;
         basketX = inputBasketX;

@@ -12,36 +12,41 @@ public class FinishGameWindowController {
     private Player thirdPlacePlayer;
     private final Group window;
 
+    // class constructor -> sets the group based on group from fxml file, creates Player class table
     public FinishGameWindowController(Group window) {
         this.window = window;
         players = new Player[4];
     }
 
+    // sums up the game using setPositionsOnPodium() method, changes visibility of the Group
     public void show() {
-        setPositionsOnPodium(players);
+        setPositionsOnPodium();
         window.setVisible(true);
     }
 
-    public void setPositionsOnPodium(Player[] player) {
+    // sums up the game
+    public void setPositionsOnPodium() {
 
-        for (int i = 0; i < player.length; i++) {   //bubble sort
-            for (int j = 0; j < player.length - i - 1; j++) {
-                int result1 = player[j].getScore();
-                int result2 = player[j + 1].getScore();
-                if (result1 < result2 || (result1 == result2 && player[j].getOrderAtEnd() < player[j + 1].getOrderAtEnd())) {
-                    Player temp = player[j];
-                    player[j] = player[j + 1];
-                    player[j + 1] = temp;
+        // sorting players descending using bubble sort
+        for (int i = 0; i < players.length; i++) {
+            for (int j = 0; j < players.length - i - 1; j++) {
+                int result1 = players[j].getScore();
+                int result2 = players[j + 1].getScore();
+                if (result1 < result2 || (result1 == result2 && players[j].getOrderAtEnd() < players[j + 1].getOrderAtEnd())) {
+                    Player temp = players[j];
+                    players[j] = players[j + 1];
+                    players[j + 1] = temp;
                 }
             }
         }
-        firstPlacePlayer = player[0];
-        secondPlacePlayer = player[1];
-        thirdPlacePlayer = player[2];
+        firstPlacePlayer = players[0];
+        secondPlacePlayer = players[1];
+        thirdPlacePlayer = players[2];
 
         setPlayersOnPodium();
     }
 
+    // sets the window look (correct information about who took which place n the game)
     public void setPlayersOnPodium() {
         ((ImageView) window.getChildren().get(7)).setImage(firstPlacePlayer.getPlayerOnBoard().getImage());
         ((Label) window.getChildren().get(8)).setText(firstPlacePlayer.getFirstName());
@@ -56,9 +61,6 @@ public class FinishGameWindowController {
         ((Label) window.getChildren().get(13)).setText(Integer.toString(thirdPlacePlayer.getScore()));
     }
 
-    public Player[] getPlayers() {
-        return players;
-    }
     public void setPlayers(Player [] players){
         this.players = players;
     }

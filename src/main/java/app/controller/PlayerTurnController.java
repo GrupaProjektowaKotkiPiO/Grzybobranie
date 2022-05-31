@@ -12,27 +12,15 @@ public class PlayerTurnController {
     private final Label turnLabel;
     private final ImageView turnImage;
 
+    // class constructor -> sets label & image based on fxml file
     public PlayerTurnController(Group group4) {
         turnLabel = (Label) group4.getChildren().get(2);
         turnImage = (ImageView) group4.getChildren().get(4);
     }
 
+    // changes the current player name & image (player whose turn it is)
     public void changePlayerInWindow(Player player) {
         turnLabel.setText(player.getFirstName());
-
-        switch (player.getType()) {
-            case PLAYER1:
-                turnImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Basket_1.png"))));
-                break;
-            case PLAYER2:
-                turnImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Basket_2.png"))));
-                break;
-            case PLAYER3:
-                turnImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Basket_3.png"))));
-                break;
-            default:
-                turnImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Basket_4.png"))));
-        }
-
+        turnImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("css/images/Basket_" + (player.getType().ordinal() + 1)  + ".png"))));
     }
 }

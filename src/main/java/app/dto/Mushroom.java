@@ -9,6 +9,7 @@ public class Mushroom {
     private final ImageView mushroomOnBoard;
     private final int positionOnBoard;
 
+    // class constructor -> sets class tiles & randomise if the mushroom is visible on board
     public Mushroom(MushroomType type, ImageView mushroomOnBoard, int position) {
         this.type = type;
         this.mushroomOnBoard = mushroomOnBoard;

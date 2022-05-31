@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 public class PlayerController {
     private final Player[] players;
 
+    // class constructor -> creates Players
     public PlayerController(Group group) {
         players = new Player[4];
         players[0] = new Player(PlayerType.PLAYER1, "Szymon", "Jakubaszek", (ImageView) group.getChildren().get(3));
@@ -16,22 +17,12 @@ public class PlayerController {
         players[3] = new Player(PlayerType.PLAYER4, "Pani", "Doktor", (ImageView) group.getChildren().get(0));
     }
 
+    // changes player position on board
     public void moveThePlayer(PlayerType type, TileController tileController) {
-        switch (type) {
-            case PLAYER1:
-                setPositionOnBoard(players[0], tileController);
-                break;
-            case PLAYER2:
-                setPositionOnBoard(players[1], tileController);
-                break;
-            case PLAYER3:
-                setPositionOnBoard(players[2], tileController);
-                break;
-            default:
-                setPositionOnBoard(players[3], tileController);
-        }
+        setPositionOnBoard(players[type.ordinal()], tileController);
     }
 
+    // sets the new player position
     private void setPositionOnBoard(Player player, TileController tileController) {
         player.getPlayerOnBoard().setLayoutX(tileController.getBoard()[player.getPosition()].getBasketX() - 46);
         player.getPlayerOnBoard().setLayoutY(tileController.getBoard()[player.getPosition()].getBasketY() - 43.5);
