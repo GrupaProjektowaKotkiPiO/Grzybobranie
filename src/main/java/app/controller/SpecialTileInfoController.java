@@ -6,9 +6,9 @@ import javafx.scene.control.Label;
 
 public class SpecialTileInfoController {
     private final Group window;
-    private Label tileTypeLabel;
-    private Label tileInfoLabel;
-    private String[] information = {
+    private final Label tileTypeLabel;
+    private final Label tileInfoLabel;
+    private final String[] information = {
             "YOU MOVE THREE TILES FORWARD",
             "YOU LOSE ONE GAME TURN",
             "YOU RECEIVE ONE MORE DICE ROLL",

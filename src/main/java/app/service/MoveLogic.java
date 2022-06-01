@@ -41,7 +41,7 @@ public class MoveLogic {
         thirdBehindLine = true;
     }
 
-    //
+    // main class method, used to start & control the game
     public void start() {
         visibleConfiguration();
         diceController.getMoveButton().setOnMousePressed(e -> {
@@ -56,7 +56,7 @@ public class MoveLogic {
         });
     }
 
-    //
+    // implementation of move logic
     private void move() {
         int playerIndex = getWhoseTurn();
         int newPosition = playerController.getPlayers()[playerIndex].getPosition() + diceController.throwTheDice();
@@ -77,7 +77,6 @@ public class MoveLogic {
             }
         }
 
-
         playerController.getPlayers()[playerIndex].setPosition(newPosition);
         if (newPosition >= FINISH_LINE) {
             additionalBonusPoints(playerIndex);
@@ -97,6 +96,7 @@ public class MoveLogic {
         }
     }
 
+    // method used to add points to 3 top players for being the first ones to cross the finish line
     private void additionalBonusPoints(int playerIndex) {
         playerController.getPlayers()[playerIndex].setPosition(OUT_OF_BOARD);
         if (firstBehindLine) {
@@ -111,6 +111,7 @@ public class MoveLogic {
         }
     }
 
+    // logic of special tiles (what happens when you step on one of them)
     private int specialTileEvent(int playerIndex, int newPosition, TileType type) {
         switch (type) {
             case RABBIT:
@@ -146,19 +147,21 @@ public class MoveLogic {
         return newPosition;
     }
 
+    // checks if all players has crossed the finish line
     private boolean isTheEndOfTheGame() {
         int playerNumber = 0;
-        while (playerNumber < NUMBER_OF_PLAYERS && isPlayerEnd(playerNumber)) {
+        while (playerNumber < NUMBER_OF_PLAYERS && havePlayerFinishedGame(playerNumber)) {
             playerNumber++;
         }
         return playerNumber == NUMBER_OF_PLAYERS;
     }
 
-    private boolean isPlayerEnd(int index) {
+    // returns true if player has crossed the finish line
+    private boolean havePlayerFinishedGame(int index) {
         return playerController.getPlayers()[index].getPosition() == OUT_OF_BOARD;
     }
 
-    // na starcie i endzie zeby tylko 1 gracz byl widoczny
+    // sets players visibility -> you can see only 1 player at start & finish tile
     private void visibleConfiguration() {
         if(!everyoneMoved()) {
             playerController.getPlayers()[getWhoseTurn()].getPlayerOnBoard().setVisible(true);
@@ -174,23 +177,25 @@ public class MoveLogic {
         }
     }
 
+    // checks if every player has moved from start tile
     private boolean everyoneMoved() {
-        boolean res = true;
         for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             if(playerController.getPlayers()[i].getPosition() == 0) {
-                res = false;
+                return false;
             }
         }
 
-        return res;
+        return true;
     }
 
+    // changes the player's turn which hasn't ended yet
     private void nextPlayerTurn() {
         do {
             whoseTurn++;
         } while (playerController.getPlayers()[getWhoseTurn()].getPosition() == OUT_OF_BOARD && !isTheEndOfTheGame());
     }
 
+    // gets the player number whose turn is now
     private int getWhoseTurn() {
         return whoseTurn % NUMBER_OF_PLAYERS;
     }
