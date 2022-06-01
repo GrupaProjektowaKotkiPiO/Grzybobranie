@@ -25,6 +25,7 @@ public class MushroomPicking extends Application {
             stage.show();
             stage.setResizable(false);
 
+            Group specialTileInfo = (Group) root.getChildren().get(14);
             Group finishGameWindow = (Group) root.getChildren().get(13);
             Group players = (Group) root.getChildren().get(11);
             Group mushrooms = (Group) root.getChildren().get(10);
@@ -37,7 +38,8 @@ public class MushroomPicking extends Application {
                     new DiceController(dice),
                     new PlayerTurnController(turnWindow),
                     new FinishGameWindowController(finishGameWindow),
-                    new MushroomAndTableController(mushrooms, table))).
+                    new MushroomAndTableController(mushrooms, table),
+                    new SpecialTileInfoController(specialTileInfo))).
                     start();
 
         } catch (Exception e) {

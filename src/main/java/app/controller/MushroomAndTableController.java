@@ -67,8 +67,7 @@ public class MushroomAndTableController {
                 scoreTable[0][index].setText(Integer.toString(player.getBoletusCounter()));
                 scoreTable[1][index].setText(Integer.toString(player.getToadstoalCounter()));
                 scoreTable[2][index].setText(Integer.toString(player.getBoletusCounter() - player.getToadstoalCounter()));
-                player.setScore(player.getBoletusCounter() - player.getToadstoalCounter()); //todo tutaj wyjasnic
-
+                player.setScore(player.getBoletusCounter() - player.getToadstoalCounter());
             }
         }
     }
