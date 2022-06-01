@@ -291,7 +291,7 @@
             <Rectangle height="788.0" opacity="0.81" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1300.0" />
             <Rectangle fill="#f9e8c9" height="312.0" layoutX="417.0" layoutY="193.0" stroke="#4a4439" strokeType="INSIDE" strokeWidth="4.0" width="500.0 " />
             <Button layoutX="617.0" layoutY="417.0" mnemonicParsing="false" onAction="#continueGame" prefHeight="50.0" prefWidth="100.0" stylesheets="@../css/Button.css" text="OK" />
-            <Label alignment="CENTER" layoutX="445.0" layoutY="243.0" prefHeight="34.0" prefWidth="445.0" stylesheets="@../css/finishGameWindow.css" text="you have entered the rabbit tile" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="445.0" layoutY="211.0" prefHeight="83.0" prefWidth="445.0" stylesheets="@../css/finishGameWindow.css" text="you have entered the rabbit tile" textAlignment="CENTER" />
             <Label alignment="CENTER" layoutX="452.0" layoutY="307.0" prefHeight="84.0" prefWidth="432.0" stylesheets="@../css/finishGameWindow.css" text="you move 3 tiles forward" textAlignment="CENTER" />
          </children>
       </Group>

@@ -4,7 +4,7 @@ import app.controller.*;
 import app.dto.TileType;
 
 import static app.dto.MoveType.*;
-//todo throwDiceCounter -> czyja jest tura
+
 public class MoveLogic {
     public final static int NUMBER_OF_PLAYERS = 4;
     public final static int OUT_OF_BOARD = 41;
@@ -15,11 +15,11 @@ public class MoveLogic {
     private final PlayerTurnController displayWindowController;
     private final FinishGameWindowController finishGameWindowController;
     private final MushroomAndTableController mushroomController;
-    private final SpecialTileInfoController SpecialTileInfoController;
+    private final SpecialTileInfoController specialTileInfoController;
     private boolean firstBehindLine;
     private boolean secondBehindLine;
     private boolean thirdBehindLine;
-    private int throwDiceCounter;
+    private int whoseTurn;
 
     // class constructor
     public MoveLogic(TileController inputTileController,
@@ -34,8 +34,8 @@ public class MoveLogic {
         displayWindowController = inputDisplayWindowController;
         finishGameWindowController = inputFinishGameWindowController;
         mushroomController = inputMushroomController;
-        SpecialTileInfoController = inputSpecialTileInfoController;
-        throwDiceCounter = 0;
+        specialTileInfoController = inputSpecialTileInfoController;
+        whoseTurn = 0;
         firstBehindLine = true;
         secondBehindLine = true;
         thirdBehindLine = true;
@@ -47,113 +47,122 @@ public class MoveLogic {
         diceController.getMoveButton().setOnMousePressed(e -> {
             move();
 
-            while (playerController.getPlayers()[getThrowDiceCounter()].getMoveType() == STAY) {
-                playerController.getPlayers()[getThrowDiceCounter()].setMoveType(NORMAL);
-                incrementThrowDiceCounter();
+            while (playerController.getPlayers()[getWhoseTurn()].getMoveType() == STAY) {
+                playerController.getPlayers()[getWhoseTurn()].setMoveType(NORMAL);
+                nextPlayerTurn();
             }
-            displayWindowController.changePlayerInWindow(playerController.getPlayers()[getThrowDiceCounter()]);
+            displayWindowController.changePlayerInWindow(playerController.getPlayers()[getWhoseTurn()]);
             finishGameWindowController.setPlayers(playerController.getPlayers());
         });
     }
 
     //
     private void move() {
-        //todo i = indexgracza
-        int i = getThrowDiceCounter();
-        int newPosition = playerController.getPlayers()[i].getPosition() + diceController.throwTheDice();
+        int playerIndex = getWhoseTurn();
+        int newPosition = playerController.getPlayers()[playerIndex].getPosition() + diceController.throwTheDice();
 
-        if (playerController.getPlayers()[i].getMoveType() == REROLLBACKWARDS) {
-            newPosition = playerController.getPlayers()[i].getPosition() - diceController.throwTheDice();
-            playerController.getPlayers()[i].setMoveType(NORMAL);
+        if (playerController.getPlayers()[playerIndex].getMoveType() == REROLLBACKWARDS) {
+            newPosition = playerController.getPlayers()[playerIndex].getPosition() - diceController.throwTheDice();
+            playerController.getPlayers()[playerIndex].setMoveType(NORMAL);
         }
-        if (playerController.getPlayers()[i].getMoveType() == REROLL) {
-            playerController.getPlayers()[i].setMoveType(NORMAL);
+        if (playerController.getPlayers()[playerIndex].getMoveType() == REROLL) {
+            playerController.getPlayers()[playerIndex].setMoveType(NORMAL);
         }
 
         if (newPosition < FINISH_LINE) {
             TileType type = tileController.getBoard()[newPosition].getType();
-            switch (type) {
-                case RABBIT:
-                    newPosition += 3;
-                    break;
-                case MOUNTAIN:
-                    playerController.getPlayers()[i].setMoveType(STAY);
-                    break;
-                case WATERFALL:
-                    playerController.getPlayers()[i].setMoveType(REROLL);
-                    break;
-                case HILL:
-                    newPosition -= playerController.getPlayers()[i].getBoletusCounter();
-                    break;
-                case VALLEY:
-                    if (playerController.getPlayers()[i].getBoletusCounter() >= 2)
-                        playerController.getPlayers()[i].setBoletusCounter(playerController.getPlayers()[i].getBoletusCounter() - 2);
-                    else if (playerController.getPlayers()[i].getBoletusCounter() == 1)
-                        playerController.getPlayers()[i].setBoletusCounter(playerController.getPlayers()[i].getBoletusCounter() - 1);
-                    else
-                        playerController.getPlayers()[i].setBoletusCounter(0);
-                    break;
-                case THUNDER:
-                    if (playerController.getPlayers()[i].getBoletusCounter() > 0)
-                        playerController.getPlayers()[i].setBoletusCounter(playerController.getPlayers()[i].getBoletusCounter() - 1);
-                    if (playerController.getPlayers()[i].getToadstoalCounter() > 0)
-                        playerController.getPlayers()[i].setToadstoalCounter(playerController.getPlayers()[i].getToadstoalCounter() - 1);
-                    break;
-                case BOAR:
-                    playerController.getPlayers()[i].setMoveType(REROLLBACKWARDS);
-                    break;
+            newPosition = specialTileEvent(playerIndex, newPosition, type);
+            if(type.ordinal() > 1) {
+                specialTileInfoController.show(playerController.getPlayers()[playerIndex].getFirstName(), type);
             }
         }
 
-        //todo getpos -> newpos
-        playerController.getPlayers()[i].setPosition(newPosition);
-        if (playerController.getPlayers()[i].getPosition() >= FINISH_LINE) {
-            playerController.getPlayers()[i].setPosition(OUT_OF_BOARD);
-            if (firstBehindLine) {
-                playerController.getPlayers()[i].setOrderAtEnd(3);
-                firstBehindLine = false;
-            } else if (secondBehindLine){
-                playerController.getPlayers()[i].setOrderAtEnd(2);
-                secondBehindLine = false;
-            } else if (thirdBehindLine){
-                playerController.getPlayers()[i].setOrderAtEnd(1);
-                thirdBehindLine = false;
-            }
+
+        playerController.getPlayers()[playerIndex].setPosition(newPosition);
+        if (newPosition >= FINISH_LINE) {
+            additionalBonusPoints(playerIndex);
         } else {
-            playerController.moveThePlayer(playerController.getPlayers()[i].getType(), tileController);
+            playerController.moveThePlayer(playerController.getPlayers()[playerIndex].getType(), tileController);
         }
 
-        if (playerController.getPlayers()[i].getMoveType() != REROLL &&
-                playerController.getPlayers()[i].getMoveType() != REROLLBACKWARDS) {
-            mushroomController.changeMushroomVisibility(playerController.getPlayers()[i]);
-            incrementThrowDiceCounter();
+        if (playerController.getPlayers()[playerIndex].getMoveType() != REROLL &&
+                playerController.getPlayers()[playerIndex].getMoveType() != REROLLBACKWARDS) {
+            mushroomController.changeMushroomVisibility(playerController.getPlayers()[playerIndex]);
+            nextPlayerTurn();
         }
         visibleConfiguration();
 
-        //todo do poprawy z met ponizej - word
-        if (playerController.getPlayers()[getThrowDiceCounter()].getPosition() == OUT_OF_BOARD && isTheEndOfTheGame()) {
+        if (isTheEndOfTheGame()) {
                 finishGameWindowController.show();
         }
     }
 
-    private boolean isTheEndOfTheGame() {
-        int j = 0;
-        while (j < NUMBER_OF_PLAYERS && isPlayerEnd()) {
-            j++;
+    private void additionalBonusPoints(int playerIndex) {
+        playerController.getPlayers()[playerIndex].setPosition(OUT_OF_BOARD);
+        if (firstBehindLine) {
+            playerController.getPlayers()[playerIndex].setOrderAtEnd(3);
+            firstBehindLine = false;
+        } else if (secondBehindLine){
+            playerController.getPlayers()[playerIndex].setOrderAtEnd(2);
+            secondBehindLine = false;
+        } else if (thirdBehindLine){
+            playerController.getPlayers()[playerIndex].setOrderAtEnd(1);
+            thirdBehindLine = false;
         }
-        return j == NUMBER_OF_PLAYERS;
     }
 
-    private boolean isPlayerEnd() {
-        incrementThrowDiceCounter();
-        return playerController.getPlayers()[getThrowDiceCounter()].getPosition() == OUT_OF_BOARD;
+    private int specialTileEvent(int playerIndex, int newPosition, TileType type) {
+        switch (type) {
+            case RABBIT:
+                newPosition += 3;
+                break;
+            case MOUNTAIN:
+                playerController.getPlayers()[playerIndex].setMoveType(STAY);
+                break;
+            case WATERFALL:
+                playerController.getPlayers()[playerIndex].setMoveType(REROLL);
+                break;
+            case HILL:
+                newPosition -= playerController.getPlayers()[playerIndex].getBoletusCounter();
+                break;
+            case VALLEY:
+                if (playerController.getPlayers()[playerIndex].getBoletusCounter() >= 2)
+                    playerController.getPlayers()[playerIndex].setBoletusCounter(playerController.getPlayers()[playerIndex].getBoletusCounter() - 2);
+                else if (playerController.getPlayers()[playerIndex].getBoletusCounter() == 1)
+                    playerController.getPlayers()[playerIndex].setBoletusCounter(playerController.getPlayers()[playerIndex].getBoletusCounter() - 1);
+                else
+                    playerController.getPlayers()[playerIndex].setBoletusCounter(0);
+                break;
+            case THUNDER:
+                if (playerController.getPlayers()[playerIndex].getBoletusCounter() > 0)
+                    playerController.getPlayers()[playerIndex].setBoletusCounter(playerController.getPlayers()[playerIndex].getBoletusCounter() - 1);
+                if (playerController.getPlayers()[playerIndex].getToadstoalCounter() > 0)
+                    playerController.getPlayers()[playerIndex].setToadstoalCounter(playerController.getPlayers()[playerIndex].getToadstoalCounter() - 1);
+                break;
+            case BOAR:
+                playerController.getPlayers()[playerIndex].setMoveType(REROLLBACKWARDS);
+                break;
+        }
+        return newPosition;
+    }
+
+    private boolean isTheEndOfTheGame() {
+        int playerNumber = 0;
+        while (playerNumber < NUMBER_OF_PLAYERS && isPlayerEnd(playerNumber)) {
+            playerNumber++;
+        }
+        return playerNumber == NUMBER_OF_PLAYERS;
+    }
+
+    private boolean isPlayerEnd(int index) {
+        return playerController.getPlayers()[index].getPosition() == OUT_OF_BOARD;
     }
 
     // na starcie i endzie zeby tylko 1 gracz byl widoczny
     private void visibleConfiguration() {
-        if (throwDiceCounter < NUMBER_OF_PLAYERS) {
-            playerController.getPlayers()[getThrowDiceCounter()].getPlayerOnBoard().setVisible(true);
-            for (int i = 3; i > throwDiceCounter; i--) {
+        if(!everyoneMoved()) {
+            playerController.getPlayers()[getWhoseTurn()].getPlayerOnBoard().setVisible(true);
+            for (int i = 3; i > whoseTurn; i--) {
                 playerController.getPlayers()[i].getPlayerOnBoard().setVisible(false);
             }
         }
@@ -165,12 +174,24 @@ public class MoveLogic {
         }
     }
 
+    private boolean everyoneMoved() {
+        boolean res = true;
+        for(int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            if(playerController.getPlayers()[i].getPosition() == 0) {
+                res = false;
+            }
+        }
 
-    private void incrementThrowDiceCounter() {
-        throwDiceCounter++;
+        return res;
     }
 
-    private int getThrowDiceCounter() {
-        return throwDiceCounter % NUMBER_OF_PLAYERS;
+    private void nextPlayerTurn() {
+        do {
+            whoseTurn++;
+        } while (playerController.getPlayers()[getWhoseTurn()].getPosition() == OUT_OF_BOARD && !isTheEndOfTheGame());
+    }
+
+    private int getWhoseTurn() {
+        return whoseTurn % NUMBER_OF_PLAYERS;
     }
 }

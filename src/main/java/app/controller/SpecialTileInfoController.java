@@ -9,12 +9,12 @@ public class SpecialTileInfoController {
     private Label tileTypeLabel;
     private Label tileInfoLabel;
     private String[] information = {
-            "YOU MOVE 3 TILES FORWARD",
-            "YOU LOSE 1 GAME TURN",
+            "YOU MOVE THREE TILES FORWARD",
+            "YOU LOSE ONE GAME TURN",
             "YOU RECEIVE ONE MORE DICE ROLL",
             "YOU MOVE BACKWARDS AS MANY TILES\nAS MANY MUSHROOMS IN YOUR BASKET",
-            "YOU LOSE 2 BOLETUS",
-            "YOU LOSE 1 BOLETUS AND 1 TOADSTOOL",
+            "YOU LOSE TWO BOLETUS",
+            "YOU LOSE ONE BOLETUS AND ONE\nTOADSTOOL",
             "YOU ROLL THE DICE AGAIN AND\nMOVE BACKWARDS"
     };
 
@@ -25,8 +25,8 @@ public class SpecialTileInfoController {
     }
 
     // shows the information about special tile
-    public void show(TileType tileType) {
-        tileTypeLabel.setText("YOU HAVE ENTERED THE " + tileType + " TILE");
+    public void show(String firstName, TileType tileType) {
+        tileTypeLabel.setText(firstName.toUpperCase() + " HAVE ENTERED\nTHE " + tileType + " TILE");
         tileInfoLabel.setText(information[tileType.ordinal() - 2]);
         window.setVisible(true);
     }
