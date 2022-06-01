@@ -4,7 +4,7 @@ import app.controller.*;
 import app.dto.TileType;
 
 import static app.dto.MoveType.*;
-
+//todo throwDiceCounter -> czyja jest tura
 public class MoveLogic {
     public final static int NUMBER_OF_PLAYERS = 4;
     public final static int OUT_OF_BOARD = 41;
@@ -15,6 +15,7 @@ public class MoveLogic {
     private final PlayerTurnController displayWindowController;
     private final FinishGameWindowController finishGameWindowController;
     private final MushroomAndTableController mushroomController;
+    private final SpecialTileInfoController SpecialTileInfoController;
     private boolean firstBehindLine;
     private boolean secondBehindLine;
     private boolean thirdBehindLine;
@@ -26,13 +27,14 @@ public class MoveLogic {
                      DiceController inputDiceController,
                      PlayerTurnController inputDisplayWindowController,
                      FinishGameWindowController inputFinishGameWindowController,
-                     MushroomAndTableController inputMushroomController) {
+                     MushroomAndTableController inputMushroomController, SpecialTileInfoController inputSpecialTileInfoController) {
         tileController = inputTileController;
         playerController = inputPlayerController;
         diceController = inputDiceController;
         displayWindowController = inputDisplayWindowController;
         finishGameWindowController = inputFinishGameWindowController;
         mushroomController = inputMushroomController;
+        SpecialTileInfoController = inputSpecialTileInfoController;
         throwDiceCounter = 0;
         firstBehindLine = true;
         secondBehindLine = true;
@@ -54,7 +56,9 @@ public class MoveLogic {
         });
     }
 
+    //
     private void move() {
+        //todo i = indexgracza
         int i = getThrowDiceCounter();
         int newPosition = playerController.getPlayers()[i].getPosition() + diceController.throwTheDice();
 
@@ -101,6 +105,7 @@ public class MoveLogic {
             }
         }
 
+        //todo getpos -> newpos
         playerController.getPlayers()[i].setPosition(newPosition);
         if (playerController.getPlayers()[i].getPosition() >= FINISH_LINE) {
             playerController.getPlayers()[i].setPosition(OUT_OF_BOARD);
@@ -113,8 +118,7 @@ public class MoveLogic {
             } else if (thirdBehindLine){
                 playerController.getPlayers()[i].setOrderAtEnd(1);
                 thirdBehindLine = false;
-                }
-            //todo do poprawy ify
+            }
         } else {
             playerController.moveThePlayer(playerController.getPlayers()[i].getType(), tileController);
         }
@@ -126,6 +130,7 @@ public class MoveLogic {
         }
         visibleConfiguration();
 
+        //todo do poprawy z met ponizej - word
         if (playerController.getPlayers()[getThrowDiceCounter()].getPosition() == OUT_OF_BOARD && isTheEndOfTheGame()) {
                 finishGameWindowController.show();
         }
@@ -144,6 +149,7 @@ public class MoveLogic {
         return playerController.getPlayers()[getThrowDiceCounter()].getPosition() == OUT_OF_BOARD;
     }
 
+    // na starcie i endzie zeby tylko 1 gracz byl widoczny
     private void visibleConfiguration() {
         if (throwDiceCounter < NUMBER_OF_PLAYERS) {
             playerController.getPlayers()[getThrowDiceCounter()].getPlayerOnBoard().setVisible(true);
