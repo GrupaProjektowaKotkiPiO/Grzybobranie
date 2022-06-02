@@ -7,22 +7,32 @@ import app.service.LoadFromFile;
 import java.io.FileNotFoundException;
 
 public class TileController {
-    private final Tile[] board;
+    public static final int BOARD_SIZE = 37;
+    private final Tile[] board = new Tile[BOARD_SIZE];
 
     // class constructor -> sets tiles
     public TileController() throws FileNotFoundException {
-        board = new Tile[37];
-
         int[][] basketCords = (new LoadFromFile()).load();
 
-        for(int indexBoard = 0, specialTiles = 1; indexBoard < 37; indexBoard++) {
-            if(indexBoard == 0 || indexBoard == 4 || indexBoard == 11 || indexBoard == 17 || indexBoard == 21 || indexBoard == 23 || indexBoard == 26 || indexBoard == 31 || indexBoard == 36) {
+        final int[] tilesPosTable = {0, 4, 11, 17, 21, 23, 26, 31, 36};
+
+        for(int indexBoard = 0, specialTiles = 1; indexBoard < BOARD_SIZE; indexBoard++) {
+            if(checkIfSpecialTile(tilesPosTable, indexBoard)) {
                 board[indexBoard] = new Tile(TileType.values()[specialTiles++], basketCords[indexBoard][0], basketCords[indexBoard][1]);
             }
             else {
                 board[indexBoard] = new Tile(TileType.NORMAL, basketCords[indexBoard][0], basketCords[indexBoard][1]);
             }
         }
+    }
+
+    private boolean checkIfSpecialTile(int[] tilesPosTable, int index) {
+        for(int specialTile : tilesPosTable) {
+            if(specialTile == index){
+                return true;
+            }
+        }
+        return false;
     }
 
     public Tile[] getBoard() {
