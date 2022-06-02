@@ -3,16 +3,9 @@ package app.controller;
 import app.dto.Mushroom;
 import app.dto.MushroomType;
 import app.dto.Player;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
-
-import java.util.Objects;
 
 
 public class MushroomAndTableController {
@@ -27,9 +20,12 @@ public class MushroomAndTableController {
         mushrooms = new Mushroom[NUMBER_OF_MUSHROOMS];
         scoreTable = new Label[TABLE_ROWS][TABLE_COLUMNS];
 
+        final int[] toadstoalPosTable = {0, 6, 8, 11, 13, 16, 18, 23, 26};
+        final int[] specialTilesPosTable = {4, 11, 17, 21, 23, 26, 31};
+
         // mushrooms initialization
         for (int index = 0, pos = 1; index < NUMBER_OF_MUSHROOMS; index++) {
-            if (index == 0 || index == 6 || index == 8 || index == 11 || index == 13 || index == 16 || index == 18 || index == 23 || index == 26) {
+            if (checkIfValueInTab(toadstoalPosTable, index)) {
                 mushrooms[index] = new Mushroom(MushroomType.TOADSTOAL, (ImageView) inputMushrooms.getChildren().get(index), pos);
             }
             else {
@@ -37,7 +33,7 @@ public class MushroomAndTableController {
             }
 
             pos++;
-            if (pos == 4 || pos == 11 || pos == 17 || pos == 21 || pos == 23 || pos == 26 || pos == 31) {
+            if(checkIfValueInTab(specialTilesPosTable, pos)) {
                 pos++;
             }
         }
@@ -48,6 +44,15 @@ public class MushroomAndTableController {
                 scoreTable[k][j] = (Label) inputTable.getChildren().get(i);
             }
         }
+    }
+
+    private boolean checkIfValueInTab(int[] table, int index) {
+        for(int value : table) {
+            if(value == index){
+                return true;
+            }
+        }
+        return false;
     }
 
     // collecting the mushroom -> player gets/loses points & mushroom disappear
